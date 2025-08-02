@@ -18,8 +18,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY brain_tumor_app.py .
-COPY brain_tumor_classifier.h5 .
-COPY tumor_segmentation_model.h5 .
+#COPY brain_tumor_classifier.h5 .
+#COPY tumor_segmentation_model.h5 .
 
 RUN ls -lh brain_tumor_classifier.h5
 RUN ls -lh tumor_segmentation_model.h5

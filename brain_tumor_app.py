@@ -13,10 +13,13 @@ import base64
 import textwrap
 
 # === Load Models ===
-classifier_model = load_model("brain_tumor_classifier.keras", compile=False)
+classifier_model_path = os.path.join(os.path.dirname(__file__), "brain_tumor_classifier.keras")
+classifier_model = load_model(classifier_model_path, compile=False)
 segment_model = load_model("tumor_segmentation_model.h5", compile=False)
 tokenizer = T5Tokenizer.from_pretrained("manasivivek/tumordetection")
-t5_model = TFT5ForConditionalGeneration.from_pretrained("manasivivek/tumordetection",from_pt=True)
+#t5_model = TFT5ForConditionalGeneration.from_pretrained("manasivivek/tumordetection",from_pt=True)
+t5_model = T5ForConditionalGeneration.from_pretrained("manasivivek/tumordetection",from_pt=True)
+
 # === Load class indices ===
 with open("class_indices.json") as f:
     class_indices = json.load(f)

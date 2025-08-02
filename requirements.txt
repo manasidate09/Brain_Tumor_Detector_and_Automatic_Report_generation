@@ -6,4 +6,5 @@ Pillow
 transformers
 scikit-learn
 fpdf
+PyTorch
 

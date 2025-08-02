@@ -5,3 +5,10 @@ opencv-python
 Pillow
 transformers
 scikit-learn
+fpdf
+numpy
+json
+Image
+os
+base64
+textwrap

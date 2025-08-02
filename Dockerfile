@@ -1,39 +1,25 @@
-# Use lightweight Python image
+# Base image with Python
 FROM python:3.10-slim
 
-# Install required system dependencies for OpenCV and others
-RUN apt-get update && apt-get install -y \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender-dev \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set working directory
-WORKDIR /app
+WORKDIR /Brain_Tumor_Detector_and_Automatic_Report_generation
 
-# Copy and install Python dependencies
+# Install system dependencies (optional, tweak as needed)
+RUN apt-get update && apt-get install -y git
+
+# Copy requirements and install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY brain_tumor_app.py .
-#COPY brain_tumor_classifier.h5 .
-#COPY tumor_segmentation_model.h5 .
-
-RUN ls -lh brain_tumor_classifier.h5
-RUN ls -lh tumor_segmentation_model.h5
-
-# Copy the rest of the code
+# Copy entire project
 COPY . .
 
-EXPOSE 8501
+# (Optional) Hugging Face token setup if using private models
+# ENV HF_TOKEN=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
 
-# Run the app
-CMD ["streamlit", "run", "brain_tumor_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-
-
-
-
-
-
+# Run your app (change to streamlit, flask, or your command)
+CMD ["python", "brain_tumor_app.py"]

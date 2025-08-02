@@ -8,8 +8,12 @@ ENV PYTHONUNBUFFERED=1
 # Set working directory
 WORKDIR /Brain_Tumor_Detector_and_Automatic_Report_generation
 
-# Install system dependencies (optional, tweak as needed)
-RUN apt-get update && apt-get install -y git
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    libgl1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt .

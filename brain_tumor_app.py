@@ -15,8 +15,8 @@ import textwrap
 # === Load Models ===
 classifier_model = load_model("brain_tumor_classifier.keras", compile=False)
 segment_model = load_model("tumor_segmentation_model.h5", compile=False)
-tokenizer = T5Tokenizer.from_pretrained("t5_finetune_final")
-t5_model = T5ForConditionalGeneration.from_pretrained("t5_finetune_final")
+tokenizer = T5Tokenizer.from_pretrained("manasivivek/tumordetection")
+t5_model = T5ForConditionalGeneration.from_pretrained("manasivivek/tumordetection")
 
 # === Load class indices ===
 with open("class_indices.json") as f:

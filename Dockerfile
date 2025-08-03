@@ -1,5 +1,5 @@
 # Use lightweight Python image
-FROM python3.10-slim
+FROM python:3.10-slim
 
 # Install required system dependencies for OpenCV and others
 RUN apt-get update && apt-get install -y \

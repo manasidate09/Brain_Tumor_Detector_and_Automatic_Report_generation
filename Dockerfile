@@ -2,13 +2,13 @@
 FROM python3.10-slim
 
 # Install required system dependencies for OpenCV and others
-RUN apt-get update && apt-get install -y 
-    libglib2.0-0 
-    libsm6 
-    libxext6 
-    libxrender-dev 
-    ffmpeg 
-    && rm -rf varlibaptlists
+RUN apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR app

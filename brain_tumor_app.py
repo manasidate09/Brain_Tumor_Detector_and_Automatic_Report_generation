@@ -13,10 +13,12 @@ import base64
 import textwrap
 
 # === Load Models ===
-classifier_model_path = os.path.join(os.path.dirname(__file__), "brain_tumor_classifier.keras")
-classifier_model = load_model(classifier_model_path, compile=False)
+#classifier_model_path = os.path.join(os.path.dirname(__file__), "brain_tumor_classifier.keras")
+#classifier_model = load_model(classifier_model_path, compile=False)
+classifier_model = load_model("brain_tumor_classifier.h5", compile=False)
 segment_model = load_model("tumor_segmentation_model.h5", compile=False)
 tokenizer = T5Tokenizer.from_pretrained("manasivivek/tumordetection")
+#t5_model = TFT5ForConditionalGeneration.from_pretrained("manasivivek/tumordetection",from_pt=True)
 t5_model = T5ForConditionalGeneration.from_pretrained("manasivivek/tumordetection")
 
 # === Load class indices ===
@@ -239,9 +241,13 @@ if submitted and uploaded_file is not None:
     st.image(segmented_overlay, caption="Segmentation Mask Overlay", use_container_width=True)
 
     x, y, w, h, area_cm2, conf_percent = get_tumor_info(seg_mask, prob_map)
-    location_name = None
-    location_name = predict_brain_region(x, y, w, h, original_width, original_height)
-    bbox_info = {"x": x, "y": y, "width": w, "height": h} if None not in (x, y, w, h) else None
+
+    if None not in (x, y, w, h):
+        location_name = predict_brain_region(x, y, w, h, original_width, original_height)
+        bbox_info = {"x": x, "y": y, "width": w, "height": h}
+    else:
+        location_name = "Not Applicable"
+        bbox_info = None
 
     result_json = {
         "filename": uploaded_file.name,

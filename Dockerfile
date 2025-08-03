@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
-    
+
 RUN apt-get update && apt-get install -y \
     libsm6 libxext6 libglib2.0-0 libxrender-dev ffmpeg \
     && rm -rf /var/lib/apt/lists/*
@@ -33,7 +33,7 @@ COPY . .
 EXPOSE 8501
 
 # Run the app
-CMD [streamlit, run, brain_tumor_app.py, --server.port=8501, --server.address=0.0.0.0]
+CMD ["streamlit", "run", "brain_tumor_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 
 
 

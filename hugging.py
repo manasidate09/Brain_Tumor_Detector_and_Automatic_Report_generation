@@ -7,7 +7,7 @@ from huggingface_hub import upload_folder, login
 # STEP 2: Upload folder to Hugging Face Model Hub
 upload_folder(
     repo_id="manasivivek/tumordetection",  # Your HF repo name
-    folder_path="t5_finetune_final",              # Local model folder name
+    folder_path="Brain_Tumor_Detector_and_Automatic_Report_generation",              # Local model folder name
     repo_type="model",
     commit_message="Upload final T5 medical fine-tuned model"
 )

@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Ignore T5 model and tokenizer artifacts
+model/t5_finetune_final/
+added_tokens.json
+config.json
+generation_config.json
+special_tokens_map.json
+spiece.model
+tokenizer_config.json
